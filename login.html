@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DermaAI</title>
+    <style>
+        /* Reset and Box Sizing */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Import Google Font for better typography */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: antiquewhite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Heading Styling */
+        h1 {
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Label Styling */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        /* Input Styling */
+        input {
+            width: 100%;
+            padding: 12px 40px 12px 15px; /* Adjusted padding for icon */
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1em;
+            background-color: #ecf0f1;
+        }
+
+        input:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 8px rgba(41, 128, 185, 0.3);
+            outline: none;
+            background-color: #fff;
+        }
+
+        /* Password Toggle Button */
+        .password-toggle-button {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            color: #2980b9;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-toggle-button:focus {
+            outline: none;
+        }
+
+        /* Button Styling */
+        button[type="submit"] {
+            background-color: #2980b9;
+            color: #ffffff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.3s;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1f6391;
+            transform: translateY(-2px);
+        }
+
+        /* Toggle Link Styling */
+        .toggle {
+            color: #2980b9;
+            text-decoration: none;
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+
+        .toggle:hover {
+            color: #1f6391;
+            text-decoration: underline;
+        }
+
+        /* Additional Links Styling */
+        .additional-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .additional-links a {
+            color: #2980b9;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .additional-links a:hover {
+            color: #1f6391;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 500px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            button[type="submit"] {
+                padding: 10px;
+                font-size: 0.95em;
+            }
+
+            .password-toggle-button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <form action="/login" method="POST" aria-labelledby="login-heading">
+                <h1 id="login-heading">Login</h1>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        aria-required="true"
+                        aria-describedby="email-help"
+                    >
+                    <!-- Optional: Help Text -->
+                    <!-- <small id="email-help" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                </div>
+
+                <!-- Password Field with Toggle -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        aria-required="true"
+                        aria-describedby="password-help"
+                    >
+                    <button
+                        type="button"
+                        class="password-toggle-button"
+                        aria-label="Toggle password visibility"
+                        onclick="togglePasswordVisibility()"
+                    >
+                        <!-- Using Unicode characters for simplicity -->
+                        &#128065; <!-- Eye Icon -->
+                    </button>
+                    <!-- Optional: Help Text -->
+                    <!-- <small id="password-help" class="form-text text-muted">Your password must be 8-20 characters long.</small> -->
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit">Login</button>
+
+                <!-- Additional Links -->
+                <div class="additional-links">
+                    <a href="forgot-password.html">Forgot Password?</a>
+                    <a href="signup.html" class="toggle">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Optional JavaScript for Password Toggle -->
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const toggleButton = document.querySelector('.password-toggle-button');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.innerHTML = '&#128064;'; // Open eye icon
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.innerHTML = '&#128065;'; // Closed eye icon
+            }
+        }
+    </script>
+</body>
+</html>
